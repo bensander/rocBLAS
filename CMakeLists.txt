@@ -131,7 +131,6 @@ option( BUILD_SHARED_LIBS "Build rocBLAS as a shared library" ON )
 include( clients/cmake/build-options.cmake )
 
 if( BUILD_WITH_TENSILE )
-  include(virtualenv)
   set( Tensile_LOGIC "asm_full" CACHE STRING "Tensile to use which logic?")
   set_property( CACHE Tensile_LOGIC PROPERTY STRINGS asm_full asm_lite hip_lite other )
 
@@ -139,13 +138,38 @@ if( BUILD_WITH_TENSILE )
   option( Tensile_SHORT_FILENAMES "Tensile to use short file names? Use if compiler complains they're too long." OFF )
   option( Tensile_PRINT_DEBUG "Tensile to print runtime debug info?" OFF )
 
-  set( tensile_tag "develop" CACHE STRING "Tensile tag to download" )
-  virtualenv_install("git+https://github.com/ROCmSoftwarePlatform/Tensile.git@${tensile_tag}")
-  list(APPEND CMAKE_PREFIX_PATH ${VIRTUALENV_HOME_DIR})
+  set_property( Tensile_TEST_LOCAL_PATH CACHE PATH "Use local directory for Tensile" )
+  set_property( CACHE Tensile_LOGIC PROPERTY STRINGS asm_full asm_lite hip_lite other )
+
+
+  if (Tensile_TEST_LOCAL_PATH)
+    # Use user's local Tensile path:
+    execute_process( COMMAND ${CMAKE_COMMAND} -E copy_directory ${Tensile_TEST_LOCAL_PATH} ${PROJECT_EXTERN_DIR}/Tensile)
+
+    #set( Tensile_ROOT ${Tensile_TEST_LOCAL_PATH} )
+    set( Tensile_ROOT "${PROJECT_EXTERN_DIR}/Tensile" CACHE STRING "Local path of Tensile" )
+    set( Tensile_TensileConfig ${Tensile_ROOT}/Tensile/Source/TensileConfig.cmake )
+  
+    message (STATUS "using local Tensile from: = ${Tensile_ROOT}")
+  else()
+    # Use the virtual-env setup and download package from specified repot:
+    include(virtualenv)
+
+    set( tensile_fork "ROCmSoftwarePlatform" CACHE STRING "Tensile fork to use" )
+    set( tensile_tag "develop" CACHE STRING "Tensile tag to download" )
+    virtualenv_install("git+https://github.com/${tensile_fork}/Tensile.git@${tensile_tag}")
+    list(APPEND CMAKE_PREFIX_PATH ${VIRTUALENV_HOME_DIR})
+
+    set( Tensile_ROOT "${VIRTUALENV_HOME_DIR}/lib/python2.7/site-packages/" CACHE STRING "Local path of Tensile" )
+    set( Tensile_TensileConfig ${VIRTUALENV_HOME_DIR}/cmake/TensileConfig.cmake)
+
+    message (STATUS "using GIT Tensile fork=${tensile_fork} from branch=${tensile_tag}")
+  endif()
+ 
 
   # string( SUBSTRING ${tensile_tag} 1 -1 tensile_tag )
-  # HACK: We have to set the Tensile_ROOT because find_package(Tensile) is broken
-  set( Tensile_ROOT "${VIRTUALENV_HOME_DIR}/lib/python2.7/site-packages/" CACHE STRING "Local path of Tensile" )
+
+
 endif()
 
 # Find HCC/HIP dependencies
@@ -198,7 +222,7 @@ string( REGEX MATCHALL "gfx[0-9]+" info_gfx ${rocm_info_output} )
 # list( LENGTH info_gfx info_gfx_length )
 list( REMOVE_DUPLICATES info_gfx )
 
-# message( "RESULT_VARIABLE: ${rocm_info_result}" )
+ message( "RESULT_VARIABLE: ${rocm_info_result}" )
 # message( "OUTPUT_VARIABLE: \n${rocm_info_output}" )
 # message( "INFO_GRAPHICS: \n${info_gfx}" )
 set( AMDGPU_TARGETS ${info_gfx} CACHE STRING "List of specific machine types for library to target" )
