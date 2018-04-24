@@ -232,7 +232,7 @@ extern "C" rocblas_status rocblas_set_vector(rocblas_int n,
                     }
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -264,7 +264,7 @@ extern "C" rocblas_status rocblas_set_vector(rocblas_int n,
                     // used unique_ptr to avoid memory leak
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -390,7 +390,7 @@ extern "C" rocblas_status rocblas_get_vector(rocblas_int n,
                     }
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -443,7 +443,7 @@ extern "C" rocblas_status rocblas_get_vector(rocblas_int n,
                     // used unique_ptr to avoid memory leak
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -602,7 +602,7 @@ extern "C" rocblas_status rocblas_set_matrix(rocblas_int rows,
                     }
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -635,7 +635,7 @@ extern "C" rocblas_status rocblas_set_matrix(rocblas_int rows,
                     // used unique_ptr to avoid memory leak
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -786,7 +786,7 @@ extern "C" rocblas_status rocblas_get_matrix(rocblas_int rows,
                     }
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;
@@ -839,7 +839,7 @@ extern "C" rocblas_status rocblas_get_matrix(rocblas_int rows,
                     // used unique_ptr to avoid memory leak
                     auto t_d_managed = rocblas_unique_ptr{rocblas::device_malloc(temp_byte_size),
                                                           rocblas::device_free};
-                    void* t_d = t_d_managed.get();
+                    void* t_d        = t_d_managed.get();
                     if(!t_d)
                     {
                         return rocblas_status_memory_error;

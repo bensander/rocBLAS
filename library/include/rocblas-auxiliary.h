@@ -12,7 +12,7 @@
 
 /*!\file
  * \brief rocblas-auxiliary.h provides auxilary functions in rocblas
-*/
+ */
 
 /* ============================================================================================ */
 /*! \brief  indicates whether the pointer is on the host or device. currently HIP API can only

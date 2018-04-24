@@ -42,7 +42,8 @@ extern "C" {
  */
 
 /*! \brief Used to specify whether the matrix is to be transposed or not. */
-typedef enum rocblas_operation_ {
+typedef enum rocblas_operation_
+{
     rocblas_operation_none      = 111, /**< Operate with the matrix. */
     rocblas_operation_transpose = 112, /**< Operate with the transpose of the matrix. */
     rocblas_operation_conjugate_transpose =
@@ -52,7 +53,8 @@ typedef enum rocblas_operation_ {
 /*! \brief Used by the Hermitian, symmetric and triangular matrix
  * routines to specify whether the upper or lower triangle is being referenced.
  */
-typedef enum rocblas_fill_ {
+typedef enum rocblas_fill_
+{
     rocblas_fill_upper = 121, /**< Upper triangle. */
     rocblas_fill_lower = 122, /**< Lower triangle. */
     rocblas_fill_full  = 123
@@ -61,13 +63,15 @@ typedef enum rocblas_fill_ {
 /*! \brief It is used by the triangular matrix routines to specify whether the
  * matrix is unit triangular.
  */
-typedef enum rocblas_diagonal_ {
+typedef enum rocblas_diagonal_
+{
     rocblas_diagonal_non_unit = 131, /**< Non-unit triangular. */
     rocblas_diagonal_unit     = 132, /**< Unit triangular. */
 } rocblas_diagonal;
 
 /*! \brief Indicates the side matrix A is located relative to matrix B during multiplication. */
-typedef enum rocblas_side_ {
+typedef enum rocblas_side_
+{
     rocblas_side_left = 141,  /**< Multiply general matrix by symmetric,
                         Hermitian or triangular matrix on the left. */
     rocblas_side_right = 142, /**< Multiply general matrix by symmetric,
@@ -79,7 +83,8 @@ typedef enum rocblas_side_ {
 /**
  *   @brief rocblas status codes definition
  */
-typedef enum rocblas_status_ {
+typedef enum rocblas_status_
+{
     rocblas_status_success         = 0, /**< success */
     rocblas_status_invalid_handle  = 1, /**< handle not initialized, invalid or null */
     rocblas_status_not_implemented = 2, /**< function is not implemented */
@@ -90,7 +95,8 @@ typedef enum rocblas_status_ {
 } rocblas_status;
 
 /*! \brief Indicates the precision width of data stored in a blas type. */
-typedef enum rocblas_precision_ {
+typedef enum rocblas_precision_
+{
     rocblas_precision_half           = 150,
     rocblas_precision_single         = 151,
     rocblas_precision_double         = 152,
@@ -100,13 +106,15 @@ typedef enum rocblas_precision_ {
 } rocblas_precision;
 
 /*! \brief Indicates the pointer is device pointer or host pointer */
-typedef enum rocblas_pointer_mode_ {
+typedef enum rocblas_pointer_mode_
+{
     rocblas_pointer_mode_host   = 0,
     rocblas_pointer_mode_device = 1
 } rocblas_pointer_mode;
 
 /*! \brief Indicates if layer is active with bitmask*/
-typedef enum rocblas_layer_mode {
+typedef enum rocblas_layer_mode
+{
     rocblas_layer_mode_none      = 0b0000000000,
     rocblas_layer_mode_log_trace = 0b0000000001,
     rocblas_layer_mode_log_bench = 0b0000000010,

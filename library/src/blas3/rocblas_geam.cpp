@@ -359,7 +359,7 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     }
     else if(C == A)
     {
-// C <- alpha * C + beta * B
+        // C <- alpha * C + beta * B
 
 #define GEAM_DIM_X 16
 #define GEAM_DIM_Y 16
@@ -410,7 +410,7 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     }
     else if(C == B)
     {
-// C <- alpha * A + beta * C
+        // C <- alpha * A + beta * C
 
 #define GEAM_DIM_X 16
 #define GEAM_DIM_Y 16
@@ -463,9 +463,9 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     {
         if((m == lda) && (transA == rocblas_operation_none) && (m == ldc))
         {
-// beta == 0
-// special case: A, C are processed as vectors because
-// A, C are contiguous, and A is normal (not transpose)
+            // beta == 0
+            // special case: A, C are processed as vectors because
+            // A, C are contiguous, and A is normal (not transpose)
 
 #define GEAM_DIM 256
             int size   = m * n;
@@ -492,8 +492,8 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
         }
         else
         {
-// beta == 0
-// general case for any transA, lda, ldc
+            // beta == 0
+            // general case for any transA, lda, ldc
 
 #define GEAM_DIM_X 16
 #define GEAM_DIM_Y 16
@@ -526,9 +526,9 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     {
         if((m == ldb) && (transB == rocblas_operation_none) && (m == ldc))
         {
-// alpha == 0
-// special case: B, C are processed as vectors because
-// B, C are contiguous, and B is normal (not transpose)
+            // alpha == 0
+            // special case: B, C are processed as vectors because
+            // B, C are contiguous, and B is normal (not transpose)
 
 #define GEAM_DIM 256
             int size   = m * n;
@@ -554,8 +554,8 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
         }
         else
         {
-// alpha == 0
-// general case for any transB, ldb, ldc
+            // alpha == 0
+            // general case for any transB, ldb, ldc
 
 #define GEAM_DIM_X 16
 #define GEAM_DIM_Y 16
@@ -587,8 +587,8 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     else if((m == lda) && (transA == rocblas_operation_none) && (m == ldb) &&
             (transB == rocblas_operation_none) && (m == ldc))
     {
-// special case: A, B, C are processed as vectors because
-// A, B, C are contiguous, and A and B are normal (not transpose)
+        // special case: A, B, C are processed as vectors because
+        // A, B, C are contiguous, and A and B are normal (not transpose)
 
 #define GEAM_DIM 256
         int size   = m * n;
@@ -633,7 +633,7 @@ rocblas_status rocblas_geam_template(rocblas_handle handle,
     }
     else
     {
-// general case, any transA, transB, lda, ldb, ldc
+        // general case, any transA, transB, lda, ldb, ldc
 
 #define GEAM_DIM_X 16
 #define GEAM_DIM_Y 16
